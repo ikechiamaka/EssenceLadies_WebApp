@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="text-content">
+    <h1>Bookings</h1>
+    <p>
+        If you're interested in booking any of the services offered by Luxe Ladies Escort Agency, our dedicated booking
+        team is available 24/7. For advanced bookings, you can conveniently use our online booking system.
+    </p>
+    <p><strong>There are several ways to make a booking:</strong></p>
+    <ul>
+        <li><strong>Telephone Bookings</strong> - Our friendly receptionists are ready to take your call and assist with
+            any queries you may have about potential escort dates or finding your ideal companion. We’re here to help
+            you every step of the way.</li>
+        <li>Contact us at <strong>+447417455498 / +447481879001</strong> for all booking inquiries.</li>
+        <li><strong>Booking Terms & Conditions</strong> - Luxe Ladies Escort Agency provides companionship services
+            only. All payments made are solely for companionship services. Luxe Ladies Escort Agency is not responsible
+            for any actions or decisions made by two consenting adults after the official escort date.</li>
+        <li><strong>Pre-Booking</strong> - All bookings will be confirmed at least 30 minutes before the appointment.
+            Rates, prices, and any additional fees will also be confirmed during this time.</li>
+        <li><strong>Cancelling a Booking</strong> - Should you need to cancel a booking, please notify the agency as
+            soon as possible. Late cancellation fees may apply, depending on the nature and duration of the booking.
+        </li>
+        <li><strong>Payments</strong> - All payments should be made directly to the escort before the appointment
+            begins. We currently accept <strong>CASH</strong> only.</li>
+    </ul>
+    <p><em>*Note - We are launching our online payment system soon to provide more payment options for our clients.</em>
+    </p>
+    <p>Luxe Ladies Escort Agency acts as a booking agent. All payments are for time and companionship only.</p>
+    <p>Please note that we do not respond to calls from withheld numbers.</p>
+    <p>When making a booking, you will be asked to provide the following details: Name, Full Address, and Phone Number.
+        Please specify which escort you wish to book.</p>
+    <p>All information is kept strictly confidential and will not be shared with any other organizations. You will
+        <strong>NOT</strong> receive any communication via phone calls or mail; the details provided are solely to
+        ensure that our escort arrives at your location promptly.
+    </p>
+
+    <form class="booking-form" method="POST" action="{{ url_for('make_booking') }}">
+        <label for="escort-name">Escort Name</label>
+        <input type="text" id="escort_name" name="escort_name" required>
+
+        <label for="telephone">Telephone</label>
+        <input type="tel" id="telephone" name="telephone" required>
+
+        <label for="time-to-call">Best Time To Call</label>
+        <input type="text" id="time_to_call" name="time_to_call" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="location">Outcall Location</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="length">Length Of Booking</label>
+        <input type="text" id="length" name="length" required>
+
+        <label for="date">Date of Booking</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="details">Additional Details</label>
+        <textarea id="details" name="details"></textarea>
+
+        <button type="submit">Make Booking</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Escorts Tonight - Luxe Ladies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .profile-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .profile-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        .profile-item label {
+            display: contents;
+            /* To allow the label to wrap the checkbox and text separately */
+        }
+
+        .profile-item label input[type="checkbox"] {
+            margin-right: 10px;
+            justify-self: start;
+        }
+
+        .profile-item label span {
+            font-weight: bold;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #290101;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #6e0101;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Flash messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <!-- End Flash messages -->
+
+    <div class="container">
+        <h1>Select Escorts Tonight</h1>
+        <form method="POST" action="{{ url_for('select_escorts_tonight') }}">
+            <div>
+                <label><input type="checkbox" id="select-all"> Select All</label>
+            </div>
+            <ul class="profile-list">
+                {% for profile in profiles %}
+                <li class="profile-item">
+                    <label>
+                        <input type="checkbox" name="profiles" value="{{ profile.id }}" {% if profile.tonight
+                            %}checked{% endif %}>
+                        <span>{{ profile.name }} - {{ profile.age }} - {{ profile.nationality }}</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="admin-btn delete-profiles-btn">Update Escorts Tonight</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}" class="back-btn">Back to Dashboard</a>
+    </div>
+
+
+    <script>
+        document.getElementById('select-all').onclick = function () {
+            var checkboxes = document.getElementsByName('profiles');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="profile-container">
+    <div class="about">
+        <h2>About {{ profile.name }}</h2>
+        <p>{{ profile.description }}</p>
+        <!-- Add Book Now button here -->
+        <a href="{{ url_for('bookings', escort_name=profile.name) }}" class="btn btn-primary">Book Now</a>
+    </div>
+    <div class="profile-picture">
+        <img src="{{ url_for('static', filename='uploads/' + profile.profile_picture) }}" alt="{{ profile.name }}">
+    </div>
+    <div class="details">
+        <ul>
+            <li><strong>Name:</strong> {{ profile.name }}</li>
+            <li><strong>Age:</strong> {{ profile.age }}</li>
+            <li><strong>Nationality:</strong> {{ profile.nationality }}</li>
+            <li><strong>Height:</strong> {{ profile.height }}</li>
+            <li><strong>Stats:</strong> {{ profile.stats }}</li>
+            <li><strong>Dress Size:</strong> {{ profile.dress_size }}</li>
+            <li><strong>Hair Color:</strong> {{ profile.hair_color }}</li>
+            <li><strong>Eye Color:</strong> {{ profile.eye_color }}</li>
+            <li><strong>Service Level:</strong> {{ profile.service_level }}</li>
+            <li><strong>Languages:</strong> {{ profile.languages }}</li>
+            <li><strong>Bisexual:</strong> {{ 'Yes' if profile.bisexual else 'No' }}</li>
+            <li><strong>Incall Location:</strong> {{ profile.incall_location }}</li>
+            <li><strong>Outcall Location:</strong> {{ profile.outcall_location }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

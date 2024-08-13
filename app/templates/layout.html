@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Ladies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            justify-content: flex-start;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .toggle-container label {
+            margin: 0 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #f32121;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="toggle-container">
+            <label>Not Admin</label>
+            <label class="switch">
+                <input type="checkbox" id="toggleAdmin">
+                <span class="slider"></span>
+            </label>
+            <label>Admin</label>
+        </div>
+    </div>
+
+    <!-- Flash messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <!-- End Flash messages -->
+
+    <header>
+        <div class="header-content">
+            <div class="about-us">
+                <h1>About Us</h1>
+                <p>Welcome to Luxe Ladies, where we provide the best VIP escort services in London.</p>
+            </div>
+            <div class="header-text">
+                <h1>Luxe Ladies</h1>
+                <p class="contact-info">Call +447417455498/+447481879001</p>
+                <p class="agency-info">London VIP Escort Agency</p>
+                <p class="hours-info">Open 6pm - 6am</p>
+                <div class="social-icons">
+                    <a href="#"><img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Facebook"></a>
+                    <a href="#"><img src="{{ url_for('static', filename='images/twitter.png') }}" alt="Twitter"></a>
+                    <a href="#"><img src="{{ url_for('static', filename='images/instagram.png') }}" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('escorts') }}">Escorts</a>
+        <a href="{{ url_for('escorts_tonight') }}">Escorts Tonight</a>
+        <a href="{{ url_for('bookings') }}">Bookings</a>
+        <a href="{{ url_for('prices') }}">Prices</a>
+        <a href="{{ url_for('recruitment') }}">Recruitment</a>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p><strong>London VIP Escort Agency</strong></p>
+            <p class="italic">Call +447417455498 / +447481879001</p>
+            <div class="cards-accepted">
+                <img src="{{ url_for('static', filename='images/mastercard.png') }}" alt="MasterCard">
+                <img src="{{ url_for('static', filename='images/visa.png') }}" alt="Visa">
+                <img src="{{ url_for('static', filename='images/amex.png') }}" alt="Amex">
+            </div>
+            <p class="italic">All Major Cards Accepted</p>
+            <p class="italic">Open 24 Hours</p>
+            <p class="italic">&copy; 2024 Luxe Ladies</p>
+        </div>
+        <!-- <div class="footer-image">
+            <img src="{{ url_for('static', filename='images/footer-image.png') }}" alt="Footer Image">
+        </div> -->
+    </footer>
+
+
+
+    <script>
+        // Check the state of the toggle on page load
+        window.onload = function () {
+            const toggleAdmin = document.getElementById('toggleAdmin');
+            const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+            if (isAdmin) {
+                toggleAdmin.checked = true;
+            }
+        };
+
+        // Handle toggle switch changes
+        document.getElementById('toggleAdmin').addEventListener('change', function () {
+            const isChecked = this.checked;
+            localStorage.setItem('isAdmin', isChecked);
+
+            if (isChecked) {
+                setTimeout(function () {
+                    window.location.href = "{{ url_for('login') }}";
+                }, 200);
+            } else {
+                setTimeout(function () {
+                    window.location.href = "{{ url_for('index') }}";
+                }, 200);
+            }
+        });
+
+
+        const isLoginPage = {{ 'true' if 'login' in request.endpoint else 'false' }};
+        const isLogoutPage = {{ 'true' if 'logout' in request.endpoint else 'false' }};
+
+        if (isLoginPage) {
+            window.addEventListener('beforeunload', function () {
+                localStorage.setItem('isAdmin', 'false');
+            });
+        } else if (isLogoutPage) {
+            localStorage.setItem('isAdmin', 'false');
+        }
+
+
+    </script>
+
+</body>
+
+</html>

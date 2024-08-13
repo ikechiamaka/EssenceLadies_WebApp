@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Create a New Profile</h2>
+    <form method="POST" action="{{ url_for('new_profile') }}" enctype="multipart/form-data" id="uploadForm">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.name.label(class="form-control-label") }}
+            {{ form.name(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.description.label(class="form-control-label") }}
+            {{ form.description(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.age.label(class="form-control-label") }}
+            {{ form.age(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.nationality.label(class="form-control-label") }}
+            {{ form.nationality(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.height.label(class="form-control-label") }}
+            {{ form.height(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.stats.label(class="form-control-label") }}
+            {{ form.stats(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.dress_size.label(class="form-control-label") }}
+            {{ form.dress_size(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.hair_color.label(class="form-control-label") }}
+            {{ form.hair_color(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.eye_color.label(class="form-control-label") }}
+            {{ form.eye_color(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.service_level.label(class="form-control-label") }}
+            {{ form.service_level(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.languages.label(class="form-control-label") }}
+            {{ form.languages(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.bisexual.label(class="form-control-label") }}
+            {{ form.bisexual() }}
+        </div>
+        <div class="form-group">
+            {{ form.incall_location.label(class="form-control-label") }}
+            {{ form.incall_location(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.outcall_location.label(class="form-control-label") }}
+            {{ form.outcall_location(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.profile_picture.label(class="form-control-label") }}
+            {{ form.profile_picture(class="form-control") }}
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress" id="progressContainer" style="display:none;">
+            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;">0%</div>
+        </div>
+        <div id="status"></div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- JavaScript to handle the file upload progress -->
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var form = event.target;
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', form.action, true);
+
+        xhr.upload.onprogress = function (event) {
+            if (event.lengthComputable) {
+                var percentComplete = Math.round((event.loaded / event.total) * 100);
+                var progressBar = document.getElementById('progressBar');
+                progressBar.style.width = percentComplete + '%';
+                progressBar.textContent = percentComplete + '%';
+            }
+        };
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                document.getElementById('status').textContent = 'Upload successful!';
+                setTimeout(() => {
+                    form.reset();  // Reset the form after successful upload
+                    document.getElementById('progressContainer').style.display = 'none';
+                }, 2000);  // Delay to show the full 100% before resetting
+            } else {
+                document.getElementById('status').textContent = 'Upload failed. Please try again.';
+            }
+        };
+
+        xhr.onerror = function () {
+            document.getElementById('status').textContent = 'Upload failed due to a network error.';
+        };
+
+        xhr.send(formData);
+    });
+
+    document.querySelector('input[type="file"]').addEventListener('change', function (event) {
+        var progressContainer = document.getElementById('progressContainer');
+        var progressBar = document.getElementById('progressBar');
+
+        progressContainer.style.display = 'block';
+        progressBar.style.width = '0%';
+        progressBar.textContent = '0%';
+    });
+</script>
+
+{% endblock %}

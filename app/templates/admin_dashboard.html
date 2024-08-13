@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Luxe Ladies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Admin Dashboard Content -->
+    <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <div class="admin-actions">
+            <a href="{{ url_for('new_profile') }}" class="admin-btn create-profile-btn">Create New Profile</a>
+            <a href="{{ url_for('delete_profiles') }}" class="admin-btn delete-profiles-btn">Delete Profiles</a>
+            <a href="{{ url_for('select_escorts_tonight') }}" class="admin-btn escort-tonight-btn">Select Escorts
+                Tonight</a>
+            <a href="{{ url_for('view_bookings') }}" class="admin-btn view-bookings-btn">View Bookings</a>
+            <form action="{{ url_for('clear_bookings') }}" method="POST" style="display:inline;">
+                <button type="submit" class="admin-btn clear-bookings-btn">Clear Bookings</button>
+            </form>
+
+            <a href="{{ url_for('logout') }}" class="admin-btn logout-btn">Logout</a>
+        </div>
+    </div>
+</body>
+
+</html>

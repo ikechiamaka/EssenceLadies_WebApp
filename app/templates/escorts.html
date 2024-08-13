@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Escorts</h1>
+<div class="gallery">
+    {% for profile in profiles %}
+    <div class="gallery-item">
+        <a href="{{ url_for('profile', profile_id=profile.id) }}">
+            <img src="{{ url_for('static', filename='uploads/' + profile.profile_picture) }}" alt="{{ profile.name }}">
+            <p>{{ profile.name }} - {{ profile.nationality }}</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

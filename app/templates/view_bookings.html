@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Bookings - Luxe Ladies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #972525;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #791717;
+        }
+
+        .admin-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #290101;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .admin-btn:hover {
+            background-color: #6e0101;
+        }
+
+        .export-btn {
+            background-color: #28a745;
+        }
+
+        .export-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Flash messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <!-- End Flash messages -->
+    <div class="container">
+        <h1>View Bookings</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Escort Name</th>
+                    <th>Telephone</th>
+                    <th>Time to Call</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Length of Booking</th>
+                    <th>Date</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.escort_name }}</td>
+                    <td>{{ booking.telephone }}</td>
+                    <td>{{ booking.time_to_call }}</td>
+                    <td>{{ booking.email }}</td>
+                    <td>{{ booking.location }}</td>
+                    <td>{{ booking.length_of_booking }}</td>
+                    <td>{{ booking.date_of_booking }}</td>
+                    <td>{{ booking.additional_details }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('export_bookings') }}" class="admin-btn export-btn">Download Bookings</a>
+        <a href="{{ url_for('admin_dashboard') }}" class="admin-btn">Back to Dashboard</a>
+    </div>
+</body>
+
+</html>
