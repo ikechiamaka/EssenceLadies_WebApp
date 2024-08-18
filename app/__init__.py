@@ -11,7 +11,7 @@ UPLOAD_FOLDER = 'static/uploads'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:TAGVHayCSYn64hdD@mysql-rds-luxe-ladies-2gnt.cxa8ok6mgjo2.us-west-2.rds.amazonaws.com:3306/primarydb'
 
 # Set the upload folder within the app directory
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static/uploads')
