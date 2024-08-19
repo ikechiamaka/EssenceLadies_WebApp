@@ -7,11 +7,10 @@
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Login</legend>
 
-            <!-- Username or Email Field -->
+            <!-- Username Field -->
             <div class="form-group">
-                {{ form.username_or_email.label(class="form-control-label") }}
-                {{ form.username_or_email(class="form-control form-control-lg", placeholder="Enter your username/email")
-                }}
+                {{ form.username.label(class="form-control-label") }}
+                {{ form.username(class="form-control form-control-lg", placeholder="Enter your username") }}
             </div>
 
             <!-- Password Field -->
