@@ -57,24 +57,24 @@ def register():
 
 
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('admin_dashboard'))
+    
     form = LoginForm()
+    
     if form.validate_on_submit():
-        user = None
-        # Check if the input is an email
-        if '@' in form.username_or_email.data:
-            user = User.query.filter_by(email=form.username_or_email.data).first()
-        else:
-            user = User.query.filter_by(username=form.username_or_email.data).first()
-
+        # Authenticate using username only
+        user = User.query.filter_by(username=form.username.data).first()
+        
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             return redirect(url_for('admin_dashboard'))
         else:
-            flash('Login Unsuccessful. Please check username/email and password', 'danger')
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    
     return render_template('login.html', title='Login', form=form)
 
 
