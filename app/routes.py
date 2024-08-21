@@ -203,7 +203,7 @@ def create_admin():
 
 
 @app.route('/admin_dashboard')
-@login_required
+# @login_required
 def admin_dashboard():
     if not current_user.is_admin:
         flash('You do not have permission to access this page', 'danger')
