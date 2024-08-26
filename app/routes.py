@@ -1,10 +1,8 @@
 # app/routes.py
-from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, ProfileForm
 from app.models import User, Profile
 from flask_login import login_user, current_user, logout_user, login_required
-from flask import request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
 from app import db, bcrypt
@@ -12,7 +10,7 @@ from app.models import User
 from app.models import Profile
 import uuid
 import logging
-from flask import render_template, flash, redirect, url_for, request, current_app
+from flask import render_template, flash, redirect, url_for, request, current_app, make_response
 from flask_login import login_required
 from app.forms import ProfileForm
 from app.models import User, Profile, Booking  # Ensure Booking is included here
@@ -26,7 +24,11 @@ logging.basicConfig(level=logging.DEBUG)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+@app.route('/setcookie')
+def set_cookie():
+    resp = make_response("Setting a cookie")
+    resp.set_cookie('testcookie', 'cookievalue')
+    return resp
 
 @app.route('/test_flash')
 def test_flash():
