@@ -28,7 +28,10 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-
+@app.route('/test_flash')
+def test_flash():
+    flash('This is a test flash message!', 'success')
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
