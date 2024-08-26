@@ -21,7 +21,10 @@ app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static/uploads')
 # Session management settings
 app.config['SESSION_COOKIE_NAME'] = 'session'
 # app.config['SESSION_COOKIE_DOMAIN'] = '.luxeladies.co.uk'  # Replace with your domain
-app.config['SESSION_COOKIE_SECURE'] = False  # Ensure cookies are only sent over HTTPS
+app.config['SESSION_COOKIE_SECURE'] = True  # Ensure cookies are only sent over HTTPS
+app.config['REMEMBER_COOKIE_SECURE'] = True
+
+
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
