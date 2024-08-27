@@ -24,11 +24,7 @@ logging.basicConfig(level=logging.DEBUG)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-@app.route('/setcookie')
-def set_cookie():
-    resp = make_response("Setting a cookie")
-    resp.set_cookie('testcookie', 'cookievalue')
-    return resp
+
 
 @app.route('/test_flash')
 def test_flash():
