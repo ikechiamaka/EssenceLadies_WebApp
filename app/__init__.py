@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 # Configuration settings
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://root:ANkGXFDdHjAdhWW5@postgresql-rds-luxe-ladies-cl5w.cxa8ok6mgjo2.us-west-2.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://luxeladies_user:IpZHnSqgL1Eh8bXZIo1fCtwLzYFH9Lk1@dpg-cr8acfaj1k6c73evj1ag-a/luxeladies'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static/uploads')
 
 # Session management settings
