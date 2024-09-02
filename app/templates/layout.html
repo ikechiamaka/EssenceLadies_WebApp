@@ -4,9 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Essence Ladies</title>
+    <title>Essence Ladies | London VIP Escort Agency</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Essence Ladies Escort Agency offers the best VIP escort services in London. Our stunning escorts are sophisticated, adventurous, and available for bookings starting from just £120.">
+    <meta name="keywords" content="London Escort Agency, VIP Escorts, Escort Services London, Premium Escorts, Essence Ladies, Escort Agency UK">
+    <meta name="author" content="Essence Ladies">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Essence Ladies | London VIP Escort Agency">
+    <meta property="og:description" content="Essence Ladies offers the best VIP escort services in London. Our stunning escorts are sophisticated, adventurous, and available for bookings starting from just £120.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/social-share.jpg') }}">
+    <meta property="og:url" content="https://www.essenceladies.co.uk">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Essence Ladies | London VIP Escort Agency">
+    <meta name="twitter:description" content="Essence Ladies offers the best VIP escort services in London. Our stunning escorts are sophisticated, adventurous, and available for bookings starting from just £120.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/social-share.jpg') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- Internal Styles -->
     <style>
         .top-bar {
             display: flex;
@@ -106,7 +131,7 @@
             </div>
             <div class="header-text">
                 <h1>Essence Ladies</h1>
-                <p class="contact-info">Call +447417455498/+447481879001</p>
+                <p class="contact-info">Call +447417455498 / +447481879001</p>
                 <p class="agency-info">London VIP Escort Agency</p>
                 <p class="hours-info">Open 6pm - 6am</p>
                 <div class="social-icons">
@@ -142,12 +167,7 @@
             <p class="italic">Open 24 Hours</p>
             <p class="italic">&copy; 2024 Essence Ladies</p>
         </div>
-        <!-- <div class="footer-image">
-            <img src="{{ url_for('static', filename='images/footer-image.png') }}" alt="Footer Image">
-        </div> -->
     </footer>
-
-
 
     <script>
         // Check the state of the toggle on page load
@@ -176,7 +196,6 @@
             }
         });
 
-
         const isLoginPage = {{ 'true' if 'login' in request.endpoint else 'false' }};
         const isLogoutPage = {{ 'true' if 'logout' in request.endpoint else 'false' }};
 
@@ -187,10 +206,7 @@
         } else if (isLogoutPage) {
             localStorage.setItem('isAdmin', 'false');
         }
-
-
     </script>
-
 </body>
 
 </html>
