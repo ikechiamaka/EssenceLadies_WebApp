@@ -16,6 +16,7 @@ from app.forms import ProfileForm
 from app.models import User, Profile, Booking  # Ensure Booking is included here
 import csv
 from flask import send_file
+from flask import send_from_directory, current_app
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -360,3 +361,8 @@ def prices():
 @app.route('/recruitment')
 def recruitment():
     return render_template('recruitment.html')
+
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(current_app.root_path, 'sitemap.xml')
