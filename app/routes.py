@@ -205,11 +205,11 @@ def create_admin():
 
 
 @app.route('/admin_dashboard')
-# @login_required
+@login_required
 def admin_dashboard():
-    # if not current_user.is_admin:
-    #     flash('You do not have permission to access this page', 'danger')
-    #     return redirect(url_for('index'))
+    if not current_user.is_admin:
+        flash('You do not have permission to access this page', 'danger')
+        return redirect(url_for('index'))
     return render_template('admin_dashboard.html')
 
 
