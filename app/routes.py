@@ -182,7 +182,7 @@ def delete_profiles():
 @app.route('/create_admin')
 def create_admin():
     admin_username = 'adminManu'
-    admin_email = 'admin@example.com'
+    admin_email = 'Kingsleyboakyemanu@hotmail.com'
     admin_password = 'Manu-1987'
 
     # Check if the admin user already exists
