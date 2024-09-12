@@ -1,7 +1,7 @@
 # app/routes.py
 from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, ProfileForm
-from app.models import User, Profile
+from app.models import User, Profile, EscortImage
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 import os
@@ -139,11 +139,22 @@ def new_profile():
         db.session.add(new_profile)
         db.session.commit()
 
-        flash('Profile successfully created!', 'success')
+        # Handle additional images
+        images = request.files.getlist('images')
+        for image in images:
+            if image and allowed_file(image.filename):
+                image_filename = secure_filename(image.filename)
+                image.save(os.path.join(upload_dir, image_filename))
+
+                # Create an EscortImage entry for each image
+                escort_image = EscortImage(image_filename=image_filename, profile=new_profile)
+                db.session.add(escort_image)
+
+        db.session.commit()
+
+        flash('Profile and images saved successfully!', 'success')
         return redirect(url_for('index'))
     return render_template('create_profile.html', form=form)
-
-
 
 
 
