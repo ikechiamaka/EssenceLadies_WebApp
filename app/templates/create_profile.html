@@ -65,7 +65,10 @@
             {{ form.profile_picture.label(class="form-control-label") }}
             {{ form.profile_picture(class="form-control") }}
         </div>
-
+        <div class="form-group">
+            <label for="images">Upload Additional Images:</label>
+            <input type="file" name="images" id="images" multiple class="form-control">
+        </div>
         <!-- Progress Bar -->
         <div class="progress" id="progressContainer" style="display:none;">
             <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;">0%</div>
