@@ -11,6 +11,16 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+class EscortImage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image_filename = db.Column(db.String(120), nullable=False)
+    profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'), nullable=False)
+
+    profile = db.relationship('Profile', back_populates='images')
+
+    def __repr__(self):
+        return f"EscortImage('{self.image_filename}')"
+
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -27,10 +37,13 @@ class Profile(db.Model):
     incall_location = db.Column(db.String(100), nullable=True)
     outcall_location = db.Column(db.String(100), nullable=True)
     description = db.Column(db.Text, nullable=False)
-    profile_picture = db.Column(db.String(20), nullable=False, default='default.jpg')
+    profile_picture = db.Column(db.String(100), nullable=False, default='default.jpg')
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     owner = db.relationship('User', backref=db.backref('profiles', lazy=True))
     tonight = db.Column(db.Boolean, default=False)  # Indicates if profile is featured in "Escorts Tonight"
+
+    # Relationship for additional images
+    images = db.relationship('EscortImage', back_populates='profile', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f"Profile('{self.name}', '{self.nationality}', '{self.age}')"
