@@ -28,4 +28,11 @@
         </ul>
     </div>
 </div>
+
+<div class="additional-images">
+    <h3>Additional Images:</h3>
+    {% for image in profile.images %}
+    <img src="{{ url_for('static', filename='uploads/' + image.image_filename) }}" alt="Escort Image">
+    {% endfor %}
+</div>
 {% endblock %}
