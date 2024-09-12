@@ -373,6 +373,12 @@ form label {
     /* Ensures the whole image is visible */
     border-radius: 10px;
 }
+.additional-images img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px;
+}
 
 @media (max-width: 768px) {
     .profile-container {
