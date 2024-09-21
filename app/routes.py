@@ -194,7 +194,7 @@ def delete_profiles():
 def create_admin():
     admin_username = 'adminManu'
     admin_email = 'Kingsleyboakyemanu@hotmail.com'
-    admin_password = 'Manu-1987'
+    admin_password = 'King-1987'
 
     # Check if the admin user already exists
     existing_user = User.query.filter_by(username=admin_username).first()
