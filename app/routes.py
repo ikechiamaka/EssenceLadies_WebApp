@@ -214,6 +214,26 @@ def create_admin():
     return f"Admin user {admin_username} created successfully!"
 
 
+@app.route('/delete_admins', methods=['POST'])
+@login_required
+def delete_admins():
+    if not current_user.is_admin:
+        flash('You do not have permission to perform this action', 'danger')
+        return redirect(url_for('index'))
+
+    try:
+        # Delete all users where is_admin is True
+        admin_users = User.query.filter_by(is_admin=True).all()
+        for user in admin_users:
+            db.session.delete(user)
+        db.session.commit()
+        flash('All admin users have been deleted.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error deleting admin users: {str(e)}', 'danger')
+    
+    return redirect(url_for('index'))
+
 
 @app.route('/admin_dashboard')
 @login_required
